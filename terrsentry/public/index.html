@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerraSentry v2.0 - Command Center</title>
+    <!-- Modern Tech Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+</head>
+
+<body>
+    <div id="app-wrapper">
+        <!-- Main Map Container (75%) -->
+        <div id="map-container">
+            <div id="map"></div>
+            <div class="map-overlay">
+                <span class="status-indicator live"></span> LIVE TRACKING ACTIVE
+            </div>
+        </div>
+
+        <!-- Dashboard Sidebar (25%) -->
+        <div id="dashboard">
+            <header>
+                <h2>TERRASENTRY V2.0</h2>
+                <p>Industrial Mine <br> Command Center</p>
+                <div class="system-status">
+                    SYSTEM STATUS: <span class="status-ok">NOMINAL</span>
+                </div>
+            </header>
+
+            <div class="control-group">
+                <h3>[1] DYNAMIC WORKER SIMULATION</h3>
+                <p>Initialize active tracking signals in Sector 7G.</p>
+                <button id="btn-simulate" class="action-btn outline">INITIATE TRACKERS</button>
+            </div>
+
+            <div class="control-group active-hazard-mode">
+                <h3>[2] GEOLOGICAL HAZARDS</h3>
+                <p>Click map to set danger zone perimeter markers.</p>
+                <div class="button-row">
+                    <button id="btn-calc-hull" class="action-btn warning">LOCK PERIMETER</button>
+                    <button id="btn-clear-map" class="action-btn outline-secondary">RESET GRID</button>
+                </div>
+            </div>
+
+            <div class="control-group emergency">
+                <h3>[3] MULTI-USER EVACUATION</h3>
+                <p>Calculate dynamic routing to nearest safe zones bypassing all hazards.</p>
+                <button id="btn-calc-route" class="action-btn critical glow">TRIGGER EVACUATION</button>
+            </div>
+
+            <div class="control-group">
+                <h3>[4] CRITICAL LIFE-SUPPORT TRIAGE</h3>
+                <p>Allocate fractional power to vital mine subsystems.</p>
+                <div class="input-wrapper">
+                    <label for="capacity">Backup Generator Output (kW):</label>
+                    <input type="number" id="capacity" value="450" min="1" max="5000">
+                </div>
+
+                <div class="supply-list thin-scroll">
+                    <div class="supply-item"><span>Emergency Comms Mesh (Req: 50 kW | Pri: 100)</span></div>
+                    <div class="supply-item"><span>Main Ventilation Fans (Req: 300 kW | Pri: 90)</span></div>
+                    <div class="supply-item"><span>Elevator/Hoist Winch (Req: 200 kW | Pri: 85)</span></div>
+                    <div class="supply-item"><span>Dewatering Sub-Pumps (Req: 250 kW | Pri: 75)</span></div>
+                    <div class="supply-item"><span>Hazard Sensor Grid (Req: 40 kW | Pri: 60)</span></div>
+                </div>
+
+                <button id="btn-optimize-loadout" class="action-btn warning glow">INITIATE POWER TRIAGE</button>
+            </div>
+
+            <!-- Logistics Results Container -->
+            <div id="logistics-dashboard" class="hidden">
+                <div class="dashboard-header">
+                    <h3>POWER ALLOCATION DASHBOARD</h3>
+                    <button id="btn-close-dashboard" class="close-btn">&times;</button>
+                </div>
+                <div class="dashboard-content thin-scroll">
+                    <table id="results-table">
+                        <thead>
+                            <tr>
+                                <th>Subsystem</th>
+                                <th>Allocated (kW)</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="results-body">
+                            <!-- Populated dynamically via JS -->
+                        </tbody>
+                    </table>
+                    <div class="dashboard-total">
+                        <strong>TTL VALUE:</strong> <span id="total-value">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <footer>
+                TerraSentry Defense Systems &copy; 2026
+            </footer>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>

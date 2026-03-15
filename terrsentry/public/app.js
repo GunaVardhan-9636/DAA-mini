@@ -1,6 +1,5 @@
-// Backend API URL defaults to Node.js for immediate testing, 
-// though the original request upgraded the C++ backend.
-const API_URL = "http://localhost:8080/api";
+// Backend API URL defaults to relative paths for Vercel Serverless Functions
+const API_URL = "/api";
 
 // Initialize Leaflet Map (Dark Industrial Theme applied via CSS inversion)
 const map = L.map('map', {
